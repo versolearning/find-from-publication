@@ -42,7 +42,7 @@ if (Meteor.isServer) {
     });
   };
 } else {
-  SubscriptionMetadata = new Meteor.Collection(META_DATA_COLLECTION);
+  SubscriptionMetadata = new Meteor.Collection(METADATA_COLLECTION);
   
   Meteor.Collection.prototype.findFromPublication = function(name, where, options) {
     var ids = SubscriptionMetadata.find({
