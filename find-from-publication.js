@@ -1,7 +1,4 @@
-// XXX: TODO:
-//  - tests [check observe handle!]
-
-var COLLECTION_NAME = 'subscriptionMetadata';
+var METADATA_COLLECTION = 'subscriptionMetadata';
 
 var constructId = function(collectionName, publicationName, id) {
   return collectionName + '-' + publicationName + '-' + id;
@@ -18,7 +15,7 @@ if (Meteor.isServer) {
       this.added = function(collection, id, doc) {
         oldAdded(collection, id, doc);
         
-        oldAdded(COLLECTION_NAME, constructId(collection, name, id), {
+        oldAdded(METADATA_COLLECTION, constructId(collection, name, id), {
           collectionName: collection,
           documentId: id,
           publicationName: name,
@@ -34,10 +31,10 @@ if (Meteor.isServer) {
         // the only way this can get called is when all documents are removed
         // from the subscription as it's torn down, we know that the underlying document
         // will also be removed, and this will pick it up.
-        if (collection === COLLECTION_NAME)
+        if (collection === METADATA_COLLECTION)
           return;
 
-        oldRemoved(COLLECTION_NAME, constructId(collection, name, id));
+        oldRemoved(METADATA_COLLECTION, constructId(collection, name, id));
         oldRemoved(collection, id);
       };
       
@@ -45,7 +42,7 @@ if (Meteor.isServer) {
     });
   };
 } else {
-  SubscriptionMetadata = new Meteor.Collection(COLLECTION_NAME);
+  SubscriptionMetadata = new Meteor.Collection(META_DATA_COLLECTION);
   
   Meteor.Collection.prototype.findFromPublication = function(name, where, options) {
     var ids = SubscriptionMetadata.find({
