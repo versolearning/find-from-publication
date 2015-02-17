@@ -9,7 +9,7 @@ This package works around this issue by tracking the subscription's published do
 #### Server Side
 To publish a tracked set of documents, simply call:
 
-```
+``` js
 FindFromPublication.publish(name, publisherFn)
 ```
 
@@ -18,13 +18,13 @@ This behaves just as `Meteor.publish`, in that you can call `added/removed/chang
 #### Client Side
 To get the documents published by a given named publication in a given collection, simply call:
 
-```
+``` js
 Collection.findFromPublication(name, query, options);
 ```
 
 #### Example
 
-```
+``` js
 var Posts = new Mongo.Collection('posts');
 
 if (Meteor.isServer) {
@@ -50,7 +50,7 @@ By default, the documents client-side will be sorted by the order they were adde
 
 When you call `added`, we simply add a record to the `subscriptionMetadata` client-only collection. It has the form:
 
-```
+``` js
 {
   _id: 'a-unique-id-for-this-record',
   collectionName: 'posts',
