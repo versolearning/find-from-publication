@@ -59,3 +59,9 @@ When you call `added`, we simply add a record to the `subscriptionMetadata` clie
   rank: 7 // a globally increasing rank over all publications.
 }
 ```
+
+## License 
+
+MIT. (c) Percolate Studio, maintained by Tom Coleman (@tmeasday).
+
+Find From Publication was developed as part of the [Verso](versoapp.com) project.
