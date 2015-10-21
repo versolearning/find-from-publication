@@ -13,6 +13,6 @@ Package.onUse(function (api, where) {
 });
 
 Package.onTest(function (api) {
-  api.use(['tinytest', 'percolate:find-from-publication']);
+  api.use(['tinytest', 'percolate:find-from-publication', 'underscore']);
   api.addFiles('find-from-publication_tests.js', 'server');
 });
