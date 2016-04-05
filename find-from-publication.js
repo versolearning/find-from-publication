@@ -35,9 +35,14 @@ if (Meteor.isServer) {
           return;
 
         oldRemoved(METADATA_COLLECTION, constructId(collection, name, id));
-        oldRemoved(collection, id);
+
+        // On Meteor 1.3 data gets removed from the publication on stop.  This will
+        // prevent it from calling the remove document when this subscription stops so
+        // the data if it is being used by another publication is still present on the
+        // client.
+        // oldRemoved(collection, id);
       };
-      
+
       return fn.apply(this, arguments);
     });
   };
