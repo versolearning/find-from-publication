@@ -3,7 +3,7 @@ import { METADATA_COLLECTION } from "./utils";
 
 SubscriptionMetadata = new Meteor.Collection(METADATA_COLLECTION);
 
-Meteor.Collection.prototype.findFromPublication = function(publicationName, where, options) {
+function limitQuery(publicationName, where) {
   const ids = SubscriptionMetadata.find(
     {
       collectionName: this._name,
@@ -12,5 +12,10 @@ Meteor.Collection.prototype.findFromPublication = function(publicationName, wher
     { sort: { rank: -1 } }
   ).map(doc => doc.documentId);
   where = { _id: { $in: ids }, ...where };
-  return this.find(where, options);
-};
+}
+
+['find', 'findOne'].forEach(method => {
+  Meteor.Collection.prototype[method+'FromPublication'] = function(publicationName, where, options) {
+    return this[method](limitQuery(publicationName, where), options);
+  };
+});

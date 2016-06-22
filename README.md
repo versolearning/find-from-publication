@@ -21,6 +21,10 @@ To get the documents published by a given named publication in a given collectio
 ``` js
 Collection.findFromPublication(name, query, options);
 ```
+or
+``` js
+Collection.findOneFromPublication(name, query, options);
+```
 
 #### Example
 
@@ -38,6 +42,7 @@ if (Meteor.isClient) {
   
   // in a helper, etc
   var postsCursor = Posts.findFromPublication('allPosts');
+  var randomPost = Posts.findOneFromPublication('allPosts');  
 }
 ```
 
