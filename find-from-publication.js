@@ -55,4 +55,16 @@ if (Meteor.isServer) {
     
     return this.find(where, options);
   };
+
+  Meteor.Collection.prototype.findOneFromPublication = function(name, where, options) {
+    var ids = SubscriptionMetadata.find({
+      collectionName: this._name,
+      publicationName: name
+    }, {sort: {rank: -1}}).map(function(doc) {
+      return doc.documentId;
+    });
+    where = _.extend({_id: {$in: ids}}, where);
+
+    return this.findOne(where, options);
+  };
 }
