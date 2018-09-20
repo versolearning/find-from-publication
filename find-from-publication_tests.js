@@ -42,8 +42,6 @@ Meteor.publish('not-tracked', function() {
   this.ready();
 });
 
-
-
 Tinytest.add('FindFromPublication - publish - correct metadata is published', function(test) {
   var records = runPublication({}, 'tracked');
   test.equal(Object.keys(records.posts).length, 2);

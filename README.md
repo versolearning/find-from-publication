@@ -10,6 +10,8 @@ This package works around this issue by tracking the subscription's published do
 To publish a tracked set of documents, simply call:
 
 ``` js
+import { FindFromPublication } from 'meteor/percolate:find-from-publication';
+
 FindFromPublication.publish(name, publisherFn)
 ```
 
@@ -29,7 +31,11 @@ Collection.findOneFromPublication(name, query, options);
 #### Example
 
 ``` js
-var Posts = new Mongo.Collection('posts');
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { FindFromPublication } from 'meteor/percolate:find-from-publication';
+
+const Posts = new Mongo.Collection('posts');
 
 if (Meteor.isServer) {
   FindFromPublication.publish('allPosts', function() {
@@ -41,8 +47,8 @@ if (Meteor.isClient) {
   Meteor.subscribe('allPosts');
   
   // in a helper, etc
-  var postsCursor = Posts.findFromPublication('allPosts');
-  var randomPost = Posts.findOneFromPublication('allPosts');  
+  const postsCursor = Posts.findFromPublication('allPosts');
+  const randomPost = Posts.findOneFromPublication('allPosts', { _id: 'x45ebOafda' });  
 }
 ```
 

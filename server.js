@@ -6,8 +6,8 @@ export const FindFromPublication = {};
 FindFromPublication.publish = function(publicationName, fn) {
   Meteor.publish(publicationName, function() {
     let rank = 0;
-    const oldAdded = this.added;
-    const oldRemoved = this.removed;
+    const oldAdded = this.added.bind(this);
+    const oldRemoved = this.removed.bind(this);
 
     this.added = (collectionName, documentId, doc) => {
       oldAdded(collectionName, documentId, doc);

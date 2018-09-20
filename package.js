@@ -7,13 +7,13 @@ Package.describe({
 
 Package.onUse(function (api, where) {
   api.versionsFrom('METEOR@1.7');
-  api.use('ecmascript');
+  api.use(['ecmascript', 'meteor', 'minimongo', 'mongo']);
   api.mainModule('server.js', 'server');
   api.mainModule('client.js', 'client');
   api.export('FindFromPublication', 'server');
 });
 
 Package.onTest(function (api) {
-  api.use(['ecmascript', 'tinytest', 'percolate:find-from-publication']);
+  api.use(['ecmascript', 'meteor', 'tinytest', 'percolate:find-from-publication']);
   api.addFiles('find-from-publication_tests.js', 'server');
 });
