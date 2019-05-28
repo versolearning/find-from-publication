@@ -4,7 +4,7 @@ import { METADATA_COLLECTION } from "./utils";
 
 SubscriptionMetadata = new Mongo.Collection(METADATA_COLLECTION);
 
-function limitQuery(publicationName, where) {
+function limitQuery(publicationName, where = {}) {
   const ids = SubscriptionMetadata.find(
     {
       collectionName: this._name,
