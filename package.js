@@ -1,6 +1,6 @@
 Package.describe({
   name: 'percolate:find-from-publication',
-  version: '0.2.0',
+  version: '0.2.1',
   summary: 'Enable finding all documents that have been published by a given publication',
   git: 'https://github.com/percolatestudio/find-from-publication.git'
 });
